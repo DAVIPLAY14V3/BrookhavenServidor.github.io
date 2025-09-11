@@ -8,234 +8,448 @@
   <style>
     :root {
       --primary: #00ffae;
-      --bg-dark: #0f0f0f;
-      --bg-light: #1a1a1a;
+      --bg-dark: #000;
+      --bg-light: #111;
       --text: #f0f0f0;
-      --accent: #00ffaa;
+      --accent: #00ffae;
     }
     *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
     body{font-family:'Roboto',sans-serif;background:var(--bg-dark);color:var(--text);line-height:1.6;}
-    header{background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.8)),url('https://images.unsplash.com/photo-1630161322913-94a73044a6e5?auto=format&fit=crop&w=1470&q=80') no-repeat center/cover;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 20px;}
-    header h1{font-family:'Orbitron',sans-serif;font-size:3.5rem;color:var(--primary);animation:fadeIn 2s ease;}
-    header p{margin-top:10px;font-size:1.2rem;color:#ccc;}
-    .discord-button{margin-top:20px;background:var(--accent);color:#000;padding:12px 24px;font-weight:bold;border:none;border-radius:6px;cursor:pointer;text-decoration:none;transition:transform .3s ease,background .3s ease;}
-    .discord-button:hover{transform:scale(1.05);background:#00e69c;}
+
+    /* HEADER */
+    header{
+      background:#000;
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:0 20px;
+    }
+    header h1{
+      font-family:'Orbitron',sans-serif;
+      font-size:4rem;
+      color:var(--primary);
+      text-shadow:
+        0 0 8px var(--primary),
+        0 0 20px var(--primary),
+        0 0 40px var(--primary),
+        0 0 80px rgba(0,255,174,0.6);
+    }
+    header p{
+      margin-top:15px;
+      font-size:1.4rem;
+      color:var(--text);
+      text-shadow:0 0 10px var(--primary);
+    }
+    .discord-button{
+      margin-top:25px;
+      background:var(--accent);
+      color:#000;
+      padding:14px 28px;
+      font-weight:bold;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
+      text-decoration:none;
+      transition:transform .3s ease, box-shadow .3s ease;
+      box-shadow:
+        0 0 10px var(--primary),
+        0 0 30px var(--primary),
+        0 0 60px rgba(0,255,174,0.6);
+    }
+    .discord-button:hover{
+      transform:scale(1.08);
+      box-shadow:
+        0 0 20px var(--primary),
+        0 0 50px var(--primary),
+        0 0 100px rgba(0,255,174,0.8);
+    }
 
     /* NAV */
-    nav{background:#111;display:flex;justify-content:space-between;align-items:center;padding:12px 20px;position:sticky;top:0;z-index:100;}
-    .logo{font-family:'Orbitron',sans-serif;font-size:1.2rem;font-weight:bold;color:var(--primary);}
+    nav{background:#000;display:flex;justify-content:space-between;align-items:center;padding:12px 20px;position:sticky;top:0;z-index:100;box-shadow:0 0 10px var(--primary);}
+    .logo{font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:bold;color:var(--primary);text-shadow:0 0 10px var(--primary),0 0 20px var(--primary);}
     .nav-links{display:flex;gap:20px;}
-    .nav-links a{color:var(--text);text-decoration:none;font-weight:600;transition:.2s;}
-    .nav-links a:hover{color:var(--primary);}
+    .nav-links a{color:var(--text);text-decoration:none;font-weight:600;transition:.2s;text-shadow:0 0 8px var(--primary);}
+    .nav-links a:hover{color:var(--primary);text-shadow:0 0 15px var(--primary);}
     .menu-toggle{display:none;font-size:1.8rem;background:none;border:none;color:var(--primary);cursor:pointer;}
+
     @media(max-width:768px){
       .menu-toggle{display:block;}
-      .nav-links{display:none;flex-direction:column;background:#111;position:absolute;top:60px;left:0;width:100%;padding:15px 0;}
+      .nav-links{display:none;flex-direction:column;background:#000;position:absolute;top:60px;left:0;width:100%;padding:15px 0;}
       .nav-links.show{display:flex;}
       .nav-links a{padding:12px;text-align:center;}
     }
 
+    /* SECTIONS */
     section{max-width:1100px;margin:auto;padding:60px 20px;}
-    h2{font-size:2.2rem;color:var(--primary);text-align:center;margin-bottom:30px;}
+    h2{
+      font-size:2.2rem;
+      color:var(--primary);
+      text-align:center;
+      margin-bottom:30px;
+      text-shadow:
+        0 0 8px var(--primary),
+        0 0 20px var(--primary),
+        0 0 40px var(--primary),
+        0 0 80px rgba(0,255,174,0.6);
+    }
 
-    .card-grid,.gallery-grid,.faq{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
-    .card,.gallery-img,.faq-item{background:var(--bg-light);border-radius:10px;padding:20px;text-align:center;box-shadow:0 0 10px rgba(0,0,0,.3);transition:.3s;}
-    .card:hover,.gallery-img:hover,.faq-item:hover{transform:translateY(-5px);box-shadow:0 0 15px var(--primary);}
+    /* Neon mais forte */
+    h1, h2, h3, .logo {
+      color: var(--primary);
+      text-shadow:
+        0 0 8px var(--primary),
+        0 0 20px var(--primary),
+        0 0 40px var(--primary),
+        0 0 80px rgba(0,255,174,0.6);
+    }
+
+    /* Botões super brilhantes */
+    .discord-button, .card button, #top-btn {
+      box-shadow:
+        0 0 10px var(--primary),
+        0 0 30px var(--primary),
+        0 0 60px rgba(0,255,174,0.6);
+    }
+    .discord-button:hover, .card button:hover, #top-btn:hover {
+      box-shadow:
+        0 0 20px var(--primary),
+        0 0 50px var(--primary),
+        0 0 100px rgba(0,255,174,0.8);
+      transform: scale(1.05);
+    }
+
+    /* Cards e galeria com halo neon */
+    .card, .gallery-img, .stat {
+      background:var(--bg-light);
+      border-radius:10px;
+      padding:20px;
+      text-align:center;
+      box-shadow:
+        0 0 12px rgba(0,255,174,0.3),
+        0 0 24px rgba(0,255,174,0.2);
+      transition:.3s;
+    }
+    .card:hover, .gallery-img:hover, .stat:hover {
+      box-shadow:
+        0 0 20px rgba(0,255,174,0.6),
+        0 0 40px rgba(0,255,174,0.4);
+      transform: translateY(-6px) scale(1.03);
+    }
     .card img{width:90px;height:90px;border-radius:50%;object-fit:cover;margin-bottom:10px;}
+
+    /* Galeria */
     .gallery-img img{width:100%;border-radius:10px;transition:.3s;}
     .gallery-img img:hover{transform:scale(1.05);}
-
-    .rules,.novidades,.stats{background:var(--bg-light);padding:30px;border-radius:8px;box-shadow:0 0 10px rgba(0,0,0,.2);}
-    .stats{display:flex;justify-content:space-around;text-align:center;flex-wrap:wrap;gap:20px;}
-    .stat{font-size:2rem;font-weight:bold;color:var(--primary);}
-    ul,ol{margin-left:20px;line-height:1.8;}
-    form{display:flex;flex-direction:column;gap:15px;}
-    input,textarea{background:#222;border:1px solid #444;color:white;padding:10px;border-radius:5px;}
-    button{background:var(--accent);color:#000;padding:10px;font-weight:bold;border:none;border-radius:5px;cursor:pointer;transition:.3s;}
-    button:hover{background:#00e69c;}
-    .discord-widget{margin-top:30px;text-align:center;}
-    footer{background:#111;text-align:center;padding:20px;font-size:.9rem;color:#888;margin-top:60px;}
-    #top-btn{position:fixed;bottom:30px;right:30px;background:var(--primary);color:#000;border:none;padding:12px 16px;border-radius:50%;cursor:pointer;font-size:20px;display:none;transition:.3s;}
-    #top-btn:hover{transform:scale(1.1);}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);}}
 
     /* Blog */
     #blog .card img{width:100%;height:150px;object-fit:cover;border-radius:8px;margin-bottom:10px;}
     #blog button{margin-top:10px;padding:8px 15px;border:none;background:var(--accent);color:#000;font-weight:bold;border-radius:5px;cursor:pointer;transition:.3s;}
     #blog button:hover{background:#00e69c;}
 
+    /* FAQ */
+    .faq{display:grid;gap:25px;}
+    .faq-item h3{margin-bottom:10px;}
+
     /* Modal */
-    .modal{display:none;position:fixed;z-index:200;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;justify-content:center;align-items:center;}
-    .modal-content{background:var(--bg-light);padding:20px;border-radius:10px;max-width:600px;width:90%;color:var(--text);text-align:left;position:relative;}
-    .modal-content h2{color:var(--primary);margin-bottom:15px;}
-    .fechar{position:absolute;top:10px;right:15px;font-size:25px;cursor:pointer;color:var(--primary);}
+    .modal{
+      position:fixed;left:0;top:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.76);z-index:200;padding:20px;
+    }
+    .modal.show{display:flex;}
+    .modal-content{width:100%;max-width:720px;background:var(--bg-light);padding:20px;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,0.7);color:var(--text);position:relative;}
+    .modal-content h2{color:var(--primary);margin-bottom:12px;}
+    .modal-close{position:absolute;right:12px;top:8px;font-size:22px;color:var(--primary);cursor:pointer;}
+
+    /* Top button */
+    #top-btn{
+      position:fixed;right:20px;bottom:20px;background:var(--primary);color:#000;border:none;width:48px;height:48px;border-radius:50%;
+      display:none;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 0 18px var(--primary);font-size:20px;z-index:150;
+    }
+    #top-btn:hover{transform:scale(1.06);box-shadow:0 0 30px var(--primary),0 0 70px rgba(0,255,174,0.15);}
+
+    /* Footer */
+    footer{text-align:center;padding:20px;background:#000;color:var(--text);margin-top:40px;box-shadow:0 0 15px var(--primary);}
+
+    /* small screens */
+    @media (max-width:520px){
+      header h1{font-size:2.4rem;}
+      .card img{height:130px}
+    }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>Brookhaven Servidor</h1>
-  <p>Nos ajude a virar a maior comunidade de Brookhaven do Brasil!</p>
-  <a href="https://discord.gg/cKgs5E6Jc2" target="_blank" class="discord-button">Entrar no Discord</a>
-</header>
+  <!-- HEADER -->
+  <header>
+    <h1>Brookhaven Servidor</h1>
+    <p>Ajude-nos a construir a maior comunidade de Brookhaven do Brasil.</p>
+    <a href="https://discord.gg/cKgs5E6Jc2" target="_blank" rel="noopener" class="discord-button">Entrar no Discord</a>
+  </header>
 
-<nav>
-  <div class="logo">Brookhaven</div>
-  <button class="menu-toggle">☰</button>
-  <div class="nav-links">
-    <a href="#sobre">Sobre</a>
-    <a href="#historia">História</a>
-    <a href="#stats">Estatísticas</a>
-    <a href="#novidades">Novidades</a>
-    <a href="#blog">Blog</a>
-    <a href="#galeria">Galeria</a>
-    <a href="#ranking">Ranking</a>
-    <a href="#faq">FAQ</a>
-    <a href="#equipe">Equipe</a>
-    <a href="#contato">Contato</a>
-  </div>
-</nav>
-
-<section id="sobre">
-  <h2>Sobre o Servidor</h2>
-  <p style="text-align:center;">Somos uma comunidade focada em Roleplays, eventos e amizades! Aqui sua história começa!</p>
-</section>
-
-<section id="historia">
-  <h2>Nossa História</h2>
-  <div class="novidades">
-    <ul>
-      <li><b>2023:</b> Criação do servidor.</li>
-      <li><b>2024:</b> Mais de 10 eventos RP realizados.</li>
-      <li><b>2025:</b> Expansão da comunidade e parceria com streamers.</li>
-    </ul>
-  </div>
-</section>
-
-<section id="stats">
-  <h2>Estatísticas</h2>
-  <div class="stats">
-    <div><div class="stat" id="contador1">0</div><p>Membros</p></div>
-    <div><div class="stat" id="contador2">0</div><p>Eventos</p></div>
-    <div><div class="stat" id="contador3">0</div><p>RP ativos</p></div>
-  </div>
-</section>
-
-<section id="novidades">
-  <h2>Novidades</h2>
-  <div class="novidades">
-    <ul>
-      <li>🚨 Novos administradores</li>
-      <li>🎉 Evento especial da comunidade</li>
-      <li>🎁 Eleição de governadores</li>
-    </ul>
-  </div>
-</section>
-
-<section id="blog">
-  <h2>Blog & Notícias</h2>
-  <div class="card-grid">
-    <div class="card">
-      <img src="https://i.imgur.com/UYiroysl.jpg" alt="Notícia 1">
-      <h3>Grande Evento de Roleplay</h3>
-      <p>Nosso próximo evento promete reunir mais de 100 jogadores em um RP especial...</p>
-      <button onclick="abrirNoticia(1)">Ler mais</button>
+  <!-- NAV -->
+  <nav>
+    <div class="logo">Brookhaven Servidor</div>
+    <button class="menu-toggle" aria-label="Abrir menu">☰</button>
+    <div class="nav-links" role="navigation" aria-label="Links principais">
+      <a href="#sobre">Sobre</a>
+      <a href="#historia">História</a>
+      <a href="#stats">Estatísticas</a>
+      <a href="#novidades">Novidades</a>
+      <a href="#blog">Blog</a>
+      <a href="#galeria">Galeria</a>
+      <a href="#ranking">Ranking</a>
+      <a href="#faq">FAQ</a>
+      <a href="#equipe">Equipe</a>
+      <a href="#contato">Contato</a>
     </div>
-    <div class="card">
-      <img src="https://i.imgur.com/OKvWoTh.jpg" alt="Notícia 2">
-      <h3>Atualização do Servidor</h3>
-      <p>Novas casas, veículos e sistemas foram adicionados. Veja tudo o que mudou...</p>
-      <button onclick="abrirNoticia(2)">Ler mais</button>
+  </nav>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <h2>Sobre o Servidor</h2>
+    <p style="text-align:center;">Somos uma comunidade dedicada a Roleplays, eventos e integração social. Aqui a sua trajetória tem início.</p>
+  </section>
+
+  <!-- HISTÓRIA -->
+  <section id="historia">
+    <h2>Nossa História</h2>
+    <div style="max-width:900px;margin:0 auto;background:var(--bg-light);padding:18px;border-radius:10px;box-shadow:0 0 12px rgba(0,255,174,0.04);">
+      <ul style="list-style:disc;margin-left:18px;color:#dfefe9;">
+        <li><strong>2023:</strong> Criação do servidor.</li>
+        <li><strong>2024:</strong> Mais de 10 eventos RP realizados.</li>
+        <li><strong>2025:</strong> Expansão da comunidade e parcerias com streamers.</li>
+      </ul>
     </div>
-    <div class="card">
-      <img src="https://i.imgur.com/yXB4nPM.jpg" alt="Notícia 3">
-      <h3>Parceria com Streamers</h3>
-      <p>Agora temos parcerias com criadores de conteúdo para trazer mais diversão!</p>
-      <button onclick="abrirNoticia(3)">Ler mais</button>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats">
+    <h2>Estatísticas</h2>
+    <div class="stats" style="display:flex;gap:18px;justify-content:center;align-items:center;flex-wrap:wrap;">
+      <div class="stat"><div class="num" data-target="25">0</div><div style="color:#cfefe4;">Membros</div></div>
+      <div class="stat"><div class="num" data-target="10">0</div><div style="color:#cfefe4;">Eventos</div></div>
+      <div class="stat"><div class="num" data-target="5">0</div><div style="color:#cfefe4;">RPs ativos</div></div>
+    </div>
+  </section>
+
+  <!-- NOVIDADES -->
+  <section id="novidades">
+    <h2>Novidades</h2>
+    <div style="max-width:900px;margin:0 auto;">
+      <div class="card" style="background:linear-gradient(180deg,#0e0e0e,#141414);">
+        <ul style="list-style:none;color:#dfefe9;">
+          <li>🚨 Novos administradores nomeados</li>
+          <li>🎉 Evento especial da comunidade</li>
+          <li>🎁 Eleição de governadores</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section id="blog">
+    <h2>Blog & Notícias</h2>
+    <div class="card-grid">
+      <article class="card" data-article-id="1" aria-labelledby="art1-title">
+        <img src="https://i.imgur.com/UYiroysl.jpg" alt="Notícia 1">
+        <h3 id="art1-title">🎭 Mega Evento de Roleplay</h3>
+        <p>Nosso próximo evento promete reunir mais de 100 jogadores em um RP especial...</p>
+        <button class="open-article" data-id="1" aria-controls="modal">Ler mais</button>
+      </article>
+
+      <article class="card" data-article-id="2" aria-labelledby="art2-title">
+        <img src="Olx.jpg" alt="Notícia 2">
+        <h3 id="art2-title">🛒 Canal OLX no Servidor</h3>
+        <p>Agora temos o canal OLX para anúncios, trocas e vendas dentro do RP.</p>
+        <button class="open-article" data-id="2" aria-controls="modal">Ler mais</button>
+      </article>
+
+      <article class="card" data-article-id="3" aria-labelledby="art3-title">
+        <img src="Parceria.jpg" alt="Notícia 3">
+        <h3 id="art3-title">🤝 Novas Parcerias</h3>
+        <p>Estamos fechando colaborações com outros servidores para eventos conjuntos.</p>
+        <button class="open-article" data-id="3" aria-controls="modal">Ler mais</button>
+      </article>
+    </div>
+  </section>
+
+  <!-- MODAL BLOG -->
+  <div id="modal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="modalTitulo">
+    <div class="modal-content" role="document">
+      <button class="modal-close" aria-label="Fechar modal">✕</button>
+      <h2 id="modalTitulo"></h2>
+      <p id="modalTexto"></p>
     </div>
   </div>
-</section>
 
-<!-- Modal Blog -->
-<div id="modal" class="modal">
-  <div class="modal-content">
-    <span class="fechar" onclick="fecharModal()">&times;</span>
-    <h2 id="modalTitulo"></h2>
-    <p id="modalTexto"></p>
-  </div>
-</div>
+  <!-- GALERIA -->
+  <section id="galeria">
+    <h2>Galeria</h2>
+    <div class="gallery-grid">
+      <div class="gallery-img"><img src="https://i.imgur.com/UYiroysl.jpg" alt="Evento 1"></div>
+      <div class="gallery-img"><img src="Olx.jpg" alt="Evento 2"></div>
+      <div class="gallery-img"><img src="Parceria.jpg" alt="Evento 3"></div>
+    </div>
+  </section>
 
-<section id="galeria">
-  <h2>Galeria</h2>
-  <div class="gallery-grid">
-    <div class="gallery-img"><img src="https://i.imgur.com/UYiroysl.jpg" alt="Evento 1"></div>
-    <div class="gallery-img"><img src="https://i.imgur.com/OKvWoTh.jpg" alt="Evento 2"></div>
-    <div class="gallery-img"><img src="https://i.imgur.com/yXB4nPM.jpg" alt="Evento 3"></div>
-  </div>
-</section>
+  <!-- RANKING -->
+  <section id="ranking">
+    <h2>Ranking dos Mais Ativos</h2>
+    <div class="card-grid">
+      <div class="card"><h3>1º Soundwave</h3><p>Presença constante no servidor.</p></div>
+      <div class="card"><h3>2º Yan</h3><p>Quase nunca falta.</p></div>
+      <div class="card"><h3>3º theKzv7</h3><p>Na maioria das vezes ativo.</p></div>
+    </div>
+  </section>
 
-<section id="ranking">
-  <h2>Ranking RP</h2>
-  <div class="card-grid">
-    <div class="card"><h3>1º JoãoRP</h3><p>150h de RP</p></div>
-    <div class="card"><h3>2º AnaGamer</h3><p>120h de RP</p></div>
-    <div class="card"><h3>3º Zezinho</h3><p>100h de RP</p></div>
-  </div>
-</section>
+  <!-- FAQ -->
+  <section id="faq">
+    <h2>Perguntas Frequentes</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <h3>Como entro no servidor?</h3>
+        <p>Clique no botão "Entrar no Discord" no topo da página.</p>
+      </div>
+      <div class="faq-item">
+        <h3>O servidor é gratuito?</h3>
+        <p>Sim, o acesso é totalmente gratuito.</p>
+      </div>
+      <div class="faq-item">
+        <h3>É possível fazer parte da equipe?</h3>
+        <p>Sim. Periodicamente abrimos vagas para novos membros da equipe.</p>
+      </div>
+    </div>
+  </section>
 
-<section id="faq">
-  <h2>Perguntas Frequentes</h2>
-  <div class="faq">
-    <div class="faq-item"><h3>Como entro no servidor?</h3><p>Basta clicar no botão "Entrar no Discord" no topo da página.</p></div>
-    <div class="faq-item"><h3>O servidor é gratuito?</h3><p>Sim, totalmente grátis!</p></div>
-    <div class="faq-item"><h3>Posso ser staff?</h3><p>Sim! Abrimos vagas periodicamente.</p></div>
-  </div>
-</section>
+  <!-- EQUIPE -->
+  <section id="equipe">
+    <h2>Equipe</h2>
+    <div class="card-grid">
+      <div class="card"><img src="https://i.imgur.com/1Xq8ZUp.png" alt="Zezinho" style="width:90px;height:90px;border-radius:50%;object-fit:cover;"><h3>Zezinho</h3><p>Fundador</p></div>
+      <div class="card"><img src="davi.jpg" alt="Daviplay" style="width:90px;height:90px;border-radius:50%;object-fit:cover;"><h3>Daviplay</h3><p>Desenvolvedor</p></div>
+      <div class="card"><img src="adm.jpg" alt="Soundwave" style="width:90px;height:90px;border-radius:50%;object-fit:cover;"><h3>Soundwave</h3><p>Administrador RP</p></div>
+    </div>
+  </section>
 
-<section id="equipe">
-  <h2>Equipe</h2>
-  <div class="card-grid">
-    <div class="card"><img src="https://i.imgur.com/1Xq8ZUp.png"><h3>Zezinho</h3><p>Dono</p></div>
-    <div class="card"><img src="Davi.jpg"><h3>Daviplay</h3><p>Dev</p></div>
-    <div class="card"><img src="adm.jpg"><h3>Soundwave</h3><p>Staff RP</p></div>
-  </div>
-</section>
+  <!-- CONTATO -->
+  <section id="contato">
+    <h2>Contato</h2>
+    <div style="max-width:900px;margin:0 auto;">
+      <form action="mailto:seuemail@exemplo.com" method="post" enctype="text/plain">
+        <input type="text" name="nome" placeholder="Seu nome" required>
+        <input type="email" name="email" placeholder="Seu e-mail" required>
+        <textarea name="mensagem" rows="5" placeholder="Sua mensagem..." required></textarea>
+        <button type="submit">Enviar</button>
+      </form>
 
-<section id="contato">
-  <h2>Contato</h2>
-  <form action="mailto:seuemail@exemplo.com" method="post" enctype="text/plain">
-    <input type="text" name="nome" placeholder="Seu nome" required>
-    <input type="email" name="email" placeholder="Seu e-mail" required>
-    <textarea name="mensagem" rows="5" placeholder="Sua mensagem..." required></textarea>
-    <button type="submit">Enviar</button>
-  </form>
-  <div class="discord-widget">
-    <iframe src="https://discord.com/widget?id=000000000000000000&theme=dark" width="100%" height="300" frameborder="0"></iframe>
-  </div>
-</section>
+      <div class="discord-widget" style="margin-top:18px;">
+        <iframe src="https://discord.com/widget?id=000000000000000000&theme=dark" title="Widget do Discord" allowtransparency="true"></iframe>
+      </div>
+    </div>
+  </section>
 
-<footer>&copy; 2025 Brookhaven Servidor • Desenvolvido por Daviplay.developer</footer>
-<button id="top-btn">⬆</button>
+  <!-- FOOTER -->
+  <footer>&copy; 2025 Brookhaven Servidor • Desenvolvido por Daviplay.developer</footer>
 
-<script>
-const animateCounter=(id,target)=>{let count=0;const el=document.getElementById(id);const inc=Math.ceil(target/50);const inter=setInterval(()=>{count+=inc;if(count>=target){el.innerText=target;clearInterval(inter);}else{el.innerText=count;}},50);};
-window.onload=()=>{animateCounter("contador1",250);animateCounter("contador2",15);animateCounter("contador3",40);};
-const btn=document.getElementById("top-btn");
-window.onscroll=()=>{btn.style.display=(document.documentElement.scrollTop>500)?"block":"none";};
-btn.onclick=()=>{window.scrollTo({top:0,behavior:'smooth'});};
-const menuBtn=document.querySelector(".menu-toggle");const navLinks=document.querySelector(".nav-links");
-menuBtn.addEventListener("click",()=>{navLinks.classList.toggle("show");});
+  <!-- TOP BUTTON -->
+  <button id="top-btn" aria-label="Voltar ao topo">⬆</button>
 
-// Blog notícias
-const noticias={
-  1:{titulo:"Grande Evento de Roleplay",texto:"Nosso próximo evento especial será realizado neste fim de semana, trazendo uma mega simulação com governadores, policiais, médicos e muito mais! Prepare-se para viver uma experiência única."},
-  2:{titulo:"Atualização do Servidor",texto:"Adicionamos novos veículos, casas luxuosas e até mesmo um sistema bancário mais realista. Essa é apenas a primeira parte da grande atualização que virá ao longo do mês!"},
-  3:{titulo:"Parceria com Streamers",texto:"Estamos felizes em anunciar nossas novas parcerias com streamers brasileiros de Roblox. Eles trarão transmissões ao vivo e sorteios exclusivos para a comunidade!"}
-};
-function abrirNoticia(id){document.getElementById("modalTitulo").innerText=noticias[id].titulo;document.getElementById("modalTexto").innerText=noticias[id].texto;document.getElementById("modal").style.display="flex";}
-function fecharModal(){document.getElementById("modal").style.display="none";}
-window.onclick=function(e){if(e.target==document.getElementById("modal")){fecharModal();}}
-</script>
+  <!-- SCRIPTS -->
+  <script>
+    // ------- Mobile menu -------
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (menuToggle) {
+      menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
+      });
+    }
+
+    // ------- Notícias (modal) -------
+    const noticias = {
+      1: {
+        titulo: "🎭 Mega Evento de Roleplay",
+        texto: "Neste fim de semana realizaremos um evento de Roleplay com mais de 100 jogadores, envolvendo governadores, policiais, médicos e muito mais. Será uma experiência inesquecível!"
+      },
+      2: {
+        titulo: "🛒 Canal OLX no Servidor",
+        texto: "O novo canal OLX permite que membros anunciem produtos e serviços internamente, fortalecendo a economia da comunidade e facilitando negociações."
+      },
+      3: {
+        titulo: "🤝 Novas Parcerias",
+        texto: "Firmamos colaborações com servidores parceiros importantes. Em breve teremos eventos conjuntos e oportunidades para a comunidade crescer ainda mais."
+      }
+    };
+
+    const modal = document.getElementById('modal');
+    const modalTitulo = document.getElementById('modalTitulo');
+    const modalTexto = document.getElementById('modalTexto');
+    const modalCloseBtn = document.querySelector('.modal-close');
+
+    function abrirNoticia(id){
+      const n = noticias[id];
+      if(!n) return;
+      modalTitulo.textContent = n.titulo;
+      modalTexto.textContent = n.texto;
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+      // foco no conteúdo para acessibilidade
+      document.querySelector('.modal-content').focus();
+    }
+
+    function fecharModal(){
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+    }
+
+    // attach buttons
+    document.querySelectorAll('.open-article').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = btn.getAttribute('data-id');
+        abrirNoticia(id);
+      });
+    });
+
+    // close handlers
+    if(modalCloseBtn) modalCloseBtn.addEventListener('click', fecharModal);
+    modal.addEventListener('click', (e) => { if(e.target === modal) fecharModal(); });
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') fecharModal(); });
+
+    // ------- Counters -------
+    function animateCounterElement(el, target, duration = 1500){
+      const start = 0;
+      const startTime = performance.now();
+      function step(now){
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const value = Math.floor(progress * (target - start) + start);
+        el.textContent = value;
+        if(progress < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+      }
+      requestAnimationFrame(step);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.num[data-target]').forEach(el => {
+        const target = parseInt(el.getAttribute('data-target'), 10) || 0;
+        animateCounterElement(el, target, 1400);
+      });
+    });
+
+    // ------- Top button -------
+    const topBtn = document.getElementById('top-btn');
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 480) topBtn.style.display = 'flex';
+      else topBtn.style.display = 'none';
+    });
+    topBtn.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+  </script>
 
 </body>
-</html>
+          </html>
+        
