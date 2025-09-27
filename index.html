@@ -236,6 +236,260 @@ function abrirNoticia(id){document.getElementById("modalTitulo").innerText=notic
 function fecharModal(){document.getElementById("modal").style.display="none";}
 window.onclick=function(e){if(e.target==document.getElementById("modal")){fecharModal();}}
 </script>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Brookhaven Servidor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #00ffae;
+      --bg-dark: #0f0f0f;
+      --bg-light: #1a1a1a;
+      --text: #f0f0f0;
+      --accent: #00ffaa;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
+    body{font-family:'Roboto',sans-serif;background:var(--bg-dark);color:var(--text);line-height:1.6;}
+    header{background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.8)),url('images/header-bg.jpg') no-repeat center/cover;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 20px;}
+    header h1{font-family:'Orbitron',sans-serif;font-size:3.5rem;color:var(--primary);animation:fadeIn 2s ease;}
+    header p{margin-top:10px;font-size:1.2rem;color:#ccc;}
+    .discord-button{margin-top:20px;background:var(--accent);color:#000;padding:12px 24px;font-weight:bold;border:none;border-radius:6px;cursor:pointer;text-decoration:none;transition:transform .3s ease,background .3s ease;}
+    .discord-button:hover{transform:scale(1.05);background:#00e69c;}
+
+    nav{background:#111;display:flex;justify-content:space-between;align-items:center;padding:12px 20px;position:sticky;top:0;z-index:100;}
+    .logo{font-family:'Orbitron',sans-serif;font-size:1.2rem;font-weight:bold;color:var(--primary);}
+    .nav-links{display:flex;gap:20px;}
+    .nav-links a{color:var(--text);text-decoration:none;font-weight:600;transition:.2s;}
+    .nav-links a:hover{color:var(--primary);}
+    .menu-toggle{display:none;font-size:1.8rem;background:none;border:none;color:var(--primary);cursor:pointer;}
+    @media(max-width:768px){
+      .menu-toggle{display:block;}
+      .nav-links{display:none;flex-direction:column;background:#111;position:absolute;top:60px;left:0;width:100%;padding:15px 0;}
+      .nav-links.show{display:flex;}
+      .nav-links a{padding:12px;text-align:center;}
+    }
+
+    section{max-width:1100px;margin:auto;padding:60px 20px;}
+    h2{font-size:2.2rem;color:var(--primary);text-align:center;margin-bottom:30px;}
+
+    .card-grid,.gallery-grid,.faq{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
+    .card,.gallery-img,.faq-item{background:var(--bg-light);border-radius:10px;padding:20px;text-align:center;box-shadow:0 0 10px rgba(0,0,0,.3);transition:.3s;}
+    .card:hover,.gallery-img:hover,.faq-item:hover{transform:translateY(-5px);box-shadow:0 0 15px var(--primary);}
+    .card img{width:90px;height:90px;border-radius:50%;object-fit:cover;margin-bottom:10px;}
+    .gallery-img img{width:100%;border-radius:10px;transition:.3s;}
+    .gallery-img img:hover{transform:scale(1.05);}
+
+    .rules,.novidades,.stats{background:var(--bg-light);padding:30px;border-radius:8px;box-shadow:0 0 10px rgba(0,0,0,.2);}
+    .stats{display:flex;justify-content:space-around;text-align:center;flex-wrap:wrap;gap:20px;}
+    .stat{font-size:2rem;font-weight:bold;color:var(--primary);}
+    ul,ol{margin-left:20px;line-height:1.8;}
+    form{display:flex;flex-direction:column;gap:15px;}
+    input,textarea{background:#222;border:1px solid #444;color:white;padding:10px;border-radius:5px;}
+    button{background:var(--accent);color:#000;padding:10px;font-weight:bold;border:none;border-radius:5px;cursor:pointer;transition:.3s;}
+    button:hover{background:#00e69c;}
+    .discord-widget{margin-top:30px;text-align:center;}
+    footer{background:#111;text-align:center;padding:20px;font-size:.9rem;color:#888;margin-top:60px;}
+    #top-btn{position:fixed;bottom:30px;right:30px;background:var(--primary);color:#000;border:none;padding:12px 16px;border-radius:50%;cursor:pointer;font-size:20px;display:none;transition:.3s;}
+    #top-btn:hover{transform:scale(1.1);}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);}}
+
+    #blog .card img{width:100%;height:150px;object-fit:cover;border-radius:8px;margin-bottom:10px;}
+    #blog button{margin-top:10px;padding:8px 15px;border:none;background:var(--accent);color:#000;font-weight:bold;border-radius:5px;cursor:pointer;transition:.3s;}
+    #blog button:hover{background:#00e69c;}
+
+    .modal{display:none;position:fixed;z-index:200;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;justify-content:center;align-items:center;}
+    .modal-content{background:var(--bg-light);padding:20px;border-radius:10px;max-width:600px;width:90%;color:var(--text);text-align:left;position:relative;}
+    .modal-content h2{color:var(--primary);margin-bottom:15px;}
+    .fechar{position:absolute;top:10px;right:15px;font-size:25px;cursor:pointer;color:var(--primary);}
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Brookhaven Servidor</h1>
+  <p>Nos ajude a virar a maior comunidade de Brookhaven do Brasil!</p>
+  <a href="https://discord.gg/cKgs5E6Jc2" target="_blank" class="discord-button">Entrar no Discord</a>
+</header>
+
+<nav>
+  <div class="logo">Brookhaven</div>
+  <button class="menu-toggle">☰</button>
+  <div class="nav-links">
+    <a href="#sobre">Sobre</a>
+    <a href="#historia">História</a>
+    <a href="#stats">Estatísticas</a>
+    <a href="#novidades">Novidades</a>
+    <a href="#blog">Blog</a>
+    <a href="#galeria">Galeria</a>
+    <a href="#ranking">Ranking</a>
+    <a href="#faq">FAQ</a>
+    <a href="#equipe">Equipe</a>
+    <a href="#contato">Contato</a>
+  </div>
+</nav>
+
+<section id="sobre">
+  <h2>Sobre o Servidor</h2>
+  <p style="text-align:center;">Somos uma comunidade focada em Roleplays, eventos e amizades! Aqui sua história começa!</p>
+</section>
+
+<section id="historia">
+  <h2>Nossa História</h2>
+  <div class="novidades">
+    <ul>
+      <li><b>2023:</b> Criação do servidor.</li>
+      <li><b>2024:</b> Mais de 10 eventos RP realizados.</li>
+      <li><b>2025:</b> Expansão da comunidade e parceria com streamers.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="stats">
+  <h2>Estatísticas</h2>
+  <div class="stats">
+    <div><div class="stat" id="contador1">0</div><p>Membros</p></div>
+    <div><div class="stat" id="contador2">0</div><p>Eventos</p></div>
+    <div><div class="stat" id="contador3">0</div><p>RP ativos</p></div>
+  </div>
+</section>
+
+<section id="novidades">
+  <h2>Novidades</h2>
+  <div class="novidades">
+    <ul>
+      <li>🚨 Novos administradores</li>
+      <li>🎉 Evento especial da comunidade</li>
+      <li>🎁 Eleição de governadores</li>
+    </ul>
+  </div>
+</section>
+
+<section id="blog">
+  <h2>Blog & Notícias</h2>
+  <div class="card-grid">
+    <div class="card">
+      <img src="images/noticia1.jpg" alt="Notícia 1">
+      <h3>Grande Evento de Roleplay</h3>
+      <p>Nosso próximo evento promete reunir mais de 100 jogadores em um RP especial...</p>
+      <button data-id="1">Ler mais</button>
+    </div>
+    <div class="card">
+      <img src="images/noticia2.jpg" alt="Notícia 2">
+      <h3>Atualização do Servidor</h3>
+      <p>Novas casas, veículos e sistemas foram adicionados. Veja tudo o que mudou...</p>
+      <button data-id="2">Ler mais</button>
+    </div>
+    <div class="card">
+      <img src="images/noticia3.jpg" alt="Notícia 3">
+      <h3>Parceria com Streamers</h3>
+      <p>Agora temos parcerias com criadores de conteúdo para trazer mais diversão!</p>
+      <button data-id="3">Ler mais</button>
+    </div>
+  </div>
+</section>
+
+<!-- Modal Blog -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="fechar">&times;</span>
+    <h2 id="modalTitulo"></h2>
+    <p id="modalTexto"></p>
+  </div>
+</div>
+
+<section id="galeria">
+  <h2>Galeria</h2>
+  <div class="gallery-grid">
+    <div class="gallery-img"><img src="images/evento1.jpg" alt="Evento 1"></div>
+    <div class="gallery-img"><img src="images/evento2.jpg" alt="Evento 2"></div>
+    <div class="gallery-img"><img src="images/evento3.jpg" alt="Evento 3"></div>
+  </div>
+</section>
+
+<section id="ranking">
+  <h2>Ranking RP</h2>
+  <div class="card-grid">
+    <div class="card"><h3>1º JoãoRP</h3><p>150h de RP</p></div>
+    <div class="card"><h3>2º AnaGamer</h3><p>120h de RP</p></div>
+    <div class="card"><h3>3º Zezinho</h3><p>100h de RP</p></div>
+  </div>
+</section>
+
+<section id="faq">
+  <h2>Perguntas Frequentes</h2>
+  <div class="faq">
+    <div class="faq-item"><h3>Como entro no servidor?</h3><p>Basta clicar no botão "Entrar no Discord" no topo da página.</p></div>
+    <div class="faq-item"><h3>O servidor é gratuito?</h3><p>Sim, totalmente grátis!</p></div>
+    <div class="faq-item"><h3>Posso ser staff?</h3><p>Sim! Abrimos vagas periodicamente.</p></div>
+  </div>
+</section>
+
+<section id="equipe">
+  <h2>Equipe</h2>
+  <div class="card-grid">
+    <div class="card"><img src="images/zezinho.png"><h3>Zezinho</h3><p>Dono</p></div>
+    <div class="card"><img src="images/davi.jpg"><h3>Daviplay</h3><p>Dev</p></div>
+    <div class="card"><img src="images/adm.jpg"><h3>Soundwave</h3><p>Staff RP</p></div>
+  </div>
+</section>
+
+<section id="contato">
+  <h2>Contato</h2>
+  <!-- Formulário seguro com Formspree -->
+  <form action="https://formspree.io/f/manpqdon" method="POST">
+    <input type="text" name="nome" placeholder="Seu nome" required>
+    <input type="email" name="email" placeholder="Seu e-mail" required>
+    <textarea name="mensagem" rows="5" placeholder="Sua mensagem..." required></textarea>
+    <button type="submit">Enviar</button>
+  </form>
+  <div class="discord-widget">
+    <iframe src="https://discord.com/widget?id=000000000000000000&theme=dark"
+            width="100%" height="300" frameborder="0"
+            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+    </iframe>
+  </div>
+</section>
+
+<footer>&copy; 2025 Brookhaven Servidor • Desenvolvido por Daviplay.developer</footer>
+<button id="top-btn">⬆</button>
+
+<script>
+const animateCounter=(id,target)=>{let count=0;const el=document.getElementById(id);const inc=Math.ceil(target/50);const inter=setInterval(()=>{count+=inc;if(count>=target){el.innerText=target;clearInterval(inter);}else{el.innerText=count;}},50);};
+window.onload=()=>{animateCounter("contador1",250);animateCounter("contador2",15);animateCounter("contador3",40);};
+
+const btn=document.getElementById("top-btn");
+window.onscroll=()=>{btn.style.display=(document.documentElement.scrollTop>500)?"block":"none";};
+btn.addEventListener("click",()=>{window.scrollTo({top:0,behavior:'smooth'});});
+
+const menuBtn=document.querySelector(".menu-toggle");const navLinks=document.querySelector(".nav-links");
+menuBtn.addEventListener("click",()=>{navLinks.classList.toggle("show");});
+
+const noticias={
+  1:{titulo:"Grande Evento de Roleplay",texto:"Nosso próximo evento especial será realizado neste fim de semana, trazendo uma mega simulação com governadores, policiais, médicos e muito mais! Prepare-se para viver uma experiência única."},
+  2:{titulo:"Atualização do Servidor",texto:"Adicionamos novos veículos, casas luxuosas e até mesmo um sistema bancário mais realista. Essa é apenas a primeira parte da grande atualização que virá ao longo do mês!"},
+  3:{titulo:"Parceria com Streamers",texto:"Estamos felizes em anunciar nossas novas parcerias com streamers brasileiros de Roblox. Eles trarão transmissões ao vivo e sorteios exclusivos para a comunidade!"}
+};
+
+const modal=document.getElementById("modal");
+const modalTitulo=document.getElementById("modalTitulo");
+const modalTexto=document.getElementById("modalTexto");
+const fecharBtn=document.querySelector(".fechar");
+
+document.querySelectorAll("#blog button").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const id=btn.getAttribute("data-id");
+    modalTitulo.innerText=noticias[id].titulo;
+    modalTexto.innerText=noticias[id].texto;
+    modal.style.display="flex";
+  });
+});
+
+fecharBtn.addEventListener("click",()=>{modal.style.display="none";});
+window.addEventListener("click",(e)=>{if(e.target===modal){modal.style.display="none";}});
+</script>
 
 </body>
 </html>
